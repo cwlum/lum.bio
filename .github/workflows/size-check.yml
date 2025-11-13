@@ -49,8 +49,9 @@ jobs:
       - name: Compare with main branch
         if: github.event_name == 'pull_request'
         run: |
-          # Clean build artifacts and generated files
-          git clean -fdx dist/ src/content/_aggregated.json
+          # Reset any local changes (including generated files)
+          git reset --hard HEAD
+          git clean -fdx
 
           # Checkout main branch
           git fetch origin main
